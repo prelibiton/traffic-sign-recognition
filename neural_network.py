@@ -52,17 +52,14 @@ def train():
     print(net.activate(tuple(test_samples[1])))
     print(test_labels[1])
 
-    #for i in range(len(test_samples)):
-    #    output = net.activate(test_samples[i])
-    #    if output != test_labels[i]:
-    #        print (output)
-    #        print(test_labels[i])
-    #        print ("error")
-    #    else:
-    #        print("correct")
+    error = 0
+    for i in range(0, 100):
+        output = net.activate(test_samples[i])
+        if round(output[0]) != test_labels[i]:
+            error += 1
 
 
-    return test_samples
+    return error
 
-train()
+print(train())
 
