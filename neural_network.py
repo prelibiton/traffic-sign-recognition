@@ -5,7 +5,7 @@ from pybrain.datasets.supervised import SupervisedDataSet
 from pybrain.tools.shortcuts import buildNetwork
 from pybrain.supervised.trainers import BackpropTrainer
 
-def train():
+def train(epochs=1):
     classes = np.array([0, 1, 2, 3, 4, 5, 6, 7, 8, 12, 13, 14, 15, 17, 25])
     samples = []
     labels = []
@@ -45,7 +45,7 @@ def train():
     #    print(inpt, target)
     
     trainer = BackpropTrainer(net, ds)
-    trainer.trainEpochs()
+    trainer.trainEpochs(epochs)
 
     error = 0
     counter = 0
@@ -60,5 +60,5 @@ def train():
             print(counter, " : output : ", output[0], " real answer : ", test_labels[i])
     return error
 
-print(train(), "% errors")
+
 
