@@ -222,11 +222,11 @@ class PageTwo(tk.Frame):
 			print("Imported network from file: " + self.network_file)
 	
 	def ask_export_net(self):
-		self.network_file = filedialog.asksaveasfilename(filetypes = (("XML files", "*.xml")))
+		self.network_file = filedialog.asksaveasfilename(filetypes = [("XML files", "*.xml")])
 		
 		if self.network_file:
 			self.brain.export_network(self.network_file)
-			print("Exported network to file: " + self.filename)
+			print("Exported network to file: " + self.network_file)
 	
 	def train_clean(self, epochs):
 		self.brain.train_clean(epochs)
