@@ -121,6 +121,15 @@ class Brain:
 		
 	def export_network(self, filename):
 		NetworkWriter.writeToFile(self.net_shared, filename)
+		
+	def test_allsamples(self):
+		error = 0
+		for i in range(len(self.samples)):
+			output = self.net_shared.activate(tuple(np.array(self.samples[i], dtype='float64')))
+			if round(output[0]) != self.labels[i]:
+				error += 1
+				
+		return error/len(self.samples)
 
 
 

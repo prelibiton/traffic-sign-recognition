@@ -185,7 +185,7 @@ class PageTwo(tk.Frame):
 		frame_test = Frame(self)
 		frame_test.pack(fill=X)
 		
-		button = ttk.Button(frame_test, text="Test", command=self.test_image)
+		button = ttk.Button(frame_test, text="Test image", command=self.test_image)
 		button.pack(side=LEFT)
 		
 		#Frame - Result label
@@ -201,6 +201,20 @@ class PageTwo(tk.Frame):
 		
 		self.label_result = ttk.Label(frame_result, text="Sign: None, Output number: None")
 		self.label_result.pack(side=LEFT, pady=10,padx=10)
+		
+		#Frame - Result frame
+		frame_testall = Frame(self)
+		frame_testall.pack(fill=X)
+		
+		button = ttk.Button(frame_testall, text="Test all", command=self.test_all)
+		button.pack(side=LEFT)
+		
+		#Frame - Result frame
+		frame_allresult = Frame(self)
+		frame_allresult.pack(fill=X)
+		
+		self.label_allresult = ttk.Label(frame_allresult, text="Avarage error:")
+		self.label_allresult.pack(side=LEFT, pady=10,padx=10)
 		
 		#brain
 		self.image_file = ""
@@ -242,6 +256,10 @@ class PageTwo(tk.Frame):
 		result = self.brain.test_image(self.image_file)
 		sign_name = sign_names[abs(int(round(result)))]
 		self.label_result["text"] = "Sign: " + sign_name + ", Output number: " + str(result)
+		
+	def test_all(self):
+		avarage = self.brain.test_allsamples()
+		self.label_allresult["text"] = "Avarage error:" + str(avarage)
 
 app = App()
 app.mainloop()
