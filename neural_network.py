@@ -43,7 +43,7 @@ class Brain:
 
     # split the array in a way that the net will be
     # trained with 70% of the images and 
-    # tested with 30% of the them
+    # tested with the rest
 		split = int(len(self.samples) * 0.7)
 		train_samples = self.samples[0:split]
 		train_labels  = self.labels[0:split]
