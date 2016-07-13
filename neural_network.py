@@ -12,6 +12,8 @@ class Brain:
 		classes = np.array([0, 1, 2, 3, 4, 5, 6, 7, 8, 12, 13, 14, 15, 17, 25])
 		self.samples = []
 		self.labels = []
+
+    # load the images from the GTSRB directory
 		for i in range(len(classes)):
 			prefix = "GTSRB/" + format(classes[i], '05d') + '/'
 			file = open(prefix + 'GT-' + format(classes[i], '05d') + '.csv')
@@ -23,7 +25,9 @@ class Brain:
 				self.samples.append(image)
 				self.labels.append(i)
 
+    # resize the images to 10x10 pixels
 		self.samples = [cv2.resize(s, (10, 10)) for s in self.samples]
+    # normalize the pixel intensity values
 		self.samples = np.array(self.samples).astype(np.float32) / 255
 		self.samples = [s.flatten() for s in self.samples]
 		
@@ -37,6 +41,9 @@ class Brain:
 	def test_train(self, epochs=1):
 		print("Training...")
 
+    # split the array in a way that the net will be
+    # trained with 70% of the images and 
+    # tested with 30% of the them
 		split = int(len(self.samples) * 0.7)
 		train_samples = self.samples[0:split]
 		train_labels  = self.labels[0:split]
@@ -44,6 +51,9 @@ class Brain:
 		test_samples = self.samples[split:]
 		test_labels  = self.labels[split:]
 
+    # build the net with 300 input values representing 
+    # each pixel of the 10x10 image (100 values)
+    # and its Red,Green,Blue values (3 values)
 		net = buildNetwork(300, 300, 1)	
 		ds = SupervisedDataSet(300, 1)
 		for i in range(len(train_samples)):  
